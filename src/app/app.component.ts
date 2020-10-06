@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { createWorker } from 'tesseract.js';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'tesseract-ocr-reader';
+  constructor() {
+
+
+  }
 }

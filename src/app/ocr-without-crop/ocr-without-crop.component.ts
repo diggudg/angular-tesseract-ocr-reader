@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
 import { createWorker } from 'tesseract.js';
 
 @Component({
@@ -8,7 +8,7 @@ import { createWorker } from 'tesseract.js';
   styleUrls: ['./ocr-without-crop.component.scss']
 })
 export class OcrWithoutCropComponent implements OnInit {
-
+  @ViewChild(ImageCropperComponent) imageCropper: ImageCropperComponent;
   worker: Tesseract.Worker = createWorker();
   isReady: boolean;
   imageChangedEvent: any;
@@ -33,18 +33,21 @@ export class OcrWithoutCropComponent implements OnInit {
     //  console.log(event);
 
     if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
+      let reader = new FileReader();
       this.imageChangedEvent = event;
 
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (event: any) => {
         this.base64Image = event.target.result;
-        this.doOCR(this.base64Image);
       };
+      reader = null;
     }
   }
   scanOCR() {
     this.isScanning = true;
+    this.imageCropper.imageFile = this.croppedImage;
+    this.imageCropper.crop();
+    this.imageChangedEvent = null;
     this.doOCR(this.croppedImage);
   }
   fileChangeEvent(event: any): void {
@@ -52,8 +55,9 @@ export class OcrWithoutCropComponent implements OnInit {
   }
   imageCropped(event: ImageCroppedEvent): void {
     console.log(event);
-    this.doOCR(event.base64);
     this.croppedImage = event.base64;
+    console.log(this.imageCropper);
+
   }
 
   doOCR(base64Image: string): void {

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">OCR Reader by DigguDG</a>
+  <a class="navbar-brand" routerLink="/home">OCR Reader by DigguDG</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
     aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -7,19 +7,21 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" routerLink="/home">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Cropped Feature</a>
+        <a class="nav-link" routerLink="/ocr-with-cropped-image">Cropped
+          Feature</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Docs</a>
-       
+
       </li>
 
     </ul>
   </div>
 </nav>
 <div class="container-fluid">
-  <app-ocr-without-crop></app-ocr-without-crop>
+  <!-- <app-ocr-without-crop></app-ocr-without-crop> -->
+  <router-outlet></router-outlet>
 </div>

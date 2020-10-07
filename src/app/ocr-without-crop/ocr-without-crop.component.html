@@ -1,9 +1,9 @@
 <p>ocr-without-crop!</p>
 <div class="card">
-    <div class="row" *ngIf="base64Image">
+    <div class="row" *ngIf="base64Image ">
         <div class="text-center col-md-6">
             <div class="row" style="margin-top: 15px;">
-                <div class="text-center col-md-8">
+                <div class="text-center col-md-8" *ngIf=" imageChangedEvent">
                     <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="false"
                         [aspectRatio]="4 / 4" [resizeToWidth]="256" format="png" (imageCropped)="imageCropped($event)">
                     </image-cropper>
@@ -14,7 +14,7 @@
             <h5>Preview</h5>
             <img [src]="croppedImage" />
             <button class="ml-2" *ngIf="!isScanning" class="btn btn-primary" type="submit"
-                (click)="scannedOCR()">Scan</button>
+                (click)="scanOCR()">Scan</button>
         </div>
     </div>
 
